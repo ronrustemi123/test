@@ -1,23 +1,16 @@
-import { useState } from "react";
-import type { Institution } from "./types";
-import InstitutionSelect from "./pages/InstitutionSelect";
-import PlatformPage from "./pages/PlatformPage";
+import { Outlet } from "react-router";
 
 function App() {
-  const [selectedInstitution, setSelectedInstitution] =
-    useState<Institution | null>(null);
-
-  if (!selectedInstitution) {
-    return (
-      <InstitutionSelect onSelectInstitution={setSelectedInstitution} />
-    );
-  }
-
   return (
-    <PlatformPage
-      institution={selectedInstitution}
-      onBack={() => setSelectedInstitution(null)}
-    />
+    <div className="app-global-wrapper font-sans antialiased">
+      {/* 
+        This is where your global contexts would go later:
+        <ThemeProvider> or <Toaster />
+      */}
+      
+      {/* The Outlet renders whatever child route is active */}
+      <Outlet /> 
+    </div>
   );
 }
 

@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router";
 import type { Institution } from "../types";
 import { institutions } from "../data/institutions";
 import InstitutionCard from "../components/InstitutionCard";
 
-type InstitutionSelectProps = {
-  onSelectInstitution: (institution: Institution) => void;
-};
+function InstitutionSelect() {
+  const navigate = useNavigate();
 
-function InstitutionSelect({ onSelectInstitution }: InstitutionSelectProps) {
+  const handleSelect = (institution: Institution) => {
+    // Send user to the platform route, embedding the selected data in history state
+    navigate("/platform", { state: { institution } });
+  };
+
   return (
     <main className="min-h-screen flex items-center justify-center p-5 bg-[#07111f] text-white overflow-hidden relative">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.35),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(124,58,237,0.35),transparent_35%)]" />
@@ -30,7 +34,7 @@ function InstitutionSelect({ onSelectInstitution }: InstitutionSelectProps) {
             <InstitutionCard
               key={institution.id}
               institution={institution}
-              onClick={() => onSelectInstitution(institution)}
+              onClick={() => handleSelect(institution)}
             />
           ))}
         </div>
