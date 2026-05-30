@@ -13,7 +13,6 @@
     "@supabase/supabase-js": "^2.106.2",
     "@tailwindcss/vite": "^4.3.0",
     "browser-image-compression": "^2.0.2",
-    "crypto": "^1.0.1",
     "i18next": "^26.3.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.17.0",
