@@ -45,17 +45,17 @@ export default function ReportsPage() {
   const filtered = reports
     .filter((r) => {
       const matchesSearch =
-        r.title.toLowerCase().includes(search.toLowerCase()) ||
-        r.description.toLowerCase().includes(search.toLowerCase()) ||
-        (r.location_name ?? "").toLowerCase().includes(search.toLowerCase());
-      const matchesStatus = statusFilter === "all" || r.status === statusFilter;
+        r?.title.toLowerCase().includes(search.toLowerCase()) ||
+        r?.description.toLowerCase().includes(search.toLowerCase()) ||
+        (r?.location_name ?? "").toLowerCase().includes(search.toLowerCase());
+      const matchesStatus = statusFilter === "all" || r?.status === statusFilter;
       return matchesSearch && matchesStatus;
     })
     .sort((a, b) => {
-      if (sort === "newest") return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
-      if (sort === "oldest") return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-      if (sort === "most_voted") return b.upvotes - a.upvotes;
-      if (sort === "priority") return (b.priority_score ?? 0) - (a.priority_score ?? 0);
+      if (sort === "newest") return new Date(b?.created_at).getTime() - new Date(a?.created_at).getTime();
+      if (sort === "oldest") return new Date(a?.created_at).getTime() - new Date(b?.created_at).getTime();
+      if (sort === "most_voted") return b?.upvotes - a?.upvotes;
+      if (sort === "priority") return (b?.priority_score ?? 0) - (a?.priority_score ?? 0);
       return 0;
     });
 
@@ -141,13 +141,13 @@ export default function ReportsPage() {
           Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="bg-white rounded-2xl border border-gray-100 h-32 animate-pulse" />
           ))
-        ) : filtered.length === 0 ? (
+        ) : filtered?.length === 0 ? (
           <div className="py-16 text-center">
             <p className="text-sm font-semibold text-gray-900 mb-1">{t("reports.no_results_title")}</p>
             <p className="text-xs text-gray-400">{t("reports.no_results_body")}</p>
           </div>
         ) : (
-          filtered.map((report) => <ReportCard key={report.id} report={report} />)
+          filtered?.map((report) => <ReportCard key={report.id} report={report} />)
         )}
       </div>
 
