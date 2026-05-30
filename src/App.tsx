@@ -1,17 +1,14 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation } from "react-router";
+import { BottomNav } from "./components/BottomNav";
 
-function App() {
+export default function App() {
+  const location = useLocation();
+  const hideNav = location.pathname === "/create-report";
+
   return (
-    <div className="app-global-wrapper font-sans antialiased">
-      {/* 
-        This is where your global contexts would go later:
-        <ThemeProvider> or <Toaster />
-      */}
-      
-      {/* The Outlet renders whatever child route is active */}
-      <Outlet /> 
+    <div className=" bg-gray-50 pb-10">
+      <Outlet />
+      {!hideNav && <BottomNav />}
     </div>
   );
 }
-
-export default App;
