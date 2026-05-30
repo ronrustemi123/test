@@ -5,14 +5,22 @@ import { UrgencyBadge } from "./UrgencyBadge";
 import { useTranslation } from "react-i18next";
 import type { Report } from "../types/types";
 import { getAnonId } from "../utils/generateId";
+import type { TFunction } from "i18next";
 
-function timeAgo(dateStr: string, t: (key: string, opts?: object) => string) {
+function timeAgo(dateStr: string, t: TFunction) {
   const diff = Date.now() - new Date(dateStr).getTime();
   const mins = Math.floor(diff / 60000);
-  if (mins < 60) return t("reports.time_ago_minutes", { count: mins });
+
+  if (mins < 60)
+    return t("reports.time_ago_minutes", { count: mins });
+
   const hrs = Math.floor(mins / 60);
-  if (hrs < 24) return t("reports.time_ago_hours", { count: hrs });
-  return t("reports.time_ago_days", { count: Math.floor(hrs / 24) });
+  if (hrs < 24)
+    return t("reports.time_ago_hours", { count: hrs });
+
+  return t("reports.time_ago_days", {
+    count: Math.floor(hrs / 24),
+  });
 }
 
 export default function ReportCard({ report }: { report: Report }) {
